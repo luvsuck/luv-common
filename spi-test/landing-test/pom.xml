@@ -4,16 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.spacex</groupId>
-    <artifactId>landing-spacex</artifactId>
+    <groupId>com.luvsic</groupId>
+    <artifactId>landing-test</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>nasa提供的着陆月球方案</description>
+    <description>测试调度多种解决方案的module</description>
 
-    <!-- 引入nasa的spi接口 -->
     <dependencies>
+        <!-- 引入BlueOrigin着陆方案 -->
+<!--        <dependency>-->
+<!--            <groupId>com.blue</groupId>-->
+<!--            <artifactId>landing-spacex</artifactId>-->
+<!--            <version>1.0-SNAPSHOT</version>-->
+<!--        </dependency>-->
+
         <dependency>
-            <groupId>com.luvsic</groupId>
-            <artifactId>spi-interface</artifactId>
+            <groupId>com.spacex</groupId>
+            <artifactId>landing-spacex</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
