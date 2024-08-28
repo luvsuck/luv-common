@@ -1,8 +1,8 @@
 package com.nasa;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.ServiceLoader;
 
 /**
  * @Author: zyy
@@ -15,14 +15,31 @@ public class LandingOnTheMoonLoader {
     private final LandingOnTheMoon landingOnTheMoon;
     private List<LandingOnTheMoon> landingOnTheMoons;
 
+    /**
+     * 使用java提供的ServiceLoader加载服务提供者
+     */
+//    private LandingOnTheMoonLoader() {
+//        ServiceLoader<LandingOnTheMoon> loader = ServiceLoader.load(LandingOnTheMoon.class);
+//        List<LandingOnTheMoon> list = new ArrayList<>();
+//        for (LandingOnTheMoon landing : loader) {
+//            list.add(landing);
+//        }
+//        landingOnTheMoons = list;
+//        landingOnTheMoon = list.isEmpty() ? null : list.get(0);
+//    }
+
+    /**
+     * 使用模拟的ServiceLoader加载服务提供者
+     */
     private LandingOnTheMoonLoader() {
-        ServiceLoader<LandingOnTheMoon> loader = ServiceLoader.load(LandingOnTheMoon.class);
-        List<LandingOnTheMoon> list = new ArrayList<>();
-        for (LandingOnTheMoon landing : loader) {
-            list.add(landing);
-        }
-        landingOnTheMoons = list;
-        landingOnTheMoon = list.isEmpty() ? null : list.get(0);
+        ServiceProviderMock<LandingOnTheMoon> loader = ServiceProviderMock.load(LandingOnTheMoon.class);
+        LinkedHashMap<String, LandingOnTheMoon> providers = loader.getProviders();
+        providers.forEach((k, v) -> {
+            System.out.println(k);
+            landingOnTheMoons = new ArrayList<>();
+            landingOnTheMoons.add(v);
+        });
+        landingOnTheMoon = landingOnTheMoons.isEmpty() ? null : landingOnTheMoons.get(0);
     }
 
     public static LandingOnTheMoonLoader getLOADER() {
@@ -39,8 +56,8 @@ public class LandingOnTheMoonLoader {
         if (landingOnTheMoons.isEmpty()) {
             System.out.println("着陆月球服务未加载!");
         } else {
-            LandingOnTheMoon landingOnTheMoon = landingOnTheMoons.get(0);
-            landingOnTheMoon.land();
+            LandingOnTheMoon landingOn = landingOnTheMoons.get(0);
+            landingOn.land();
         }
     }
 
